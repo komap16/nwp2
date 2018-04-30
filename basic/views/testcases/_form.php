@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use dosamigos\ckeditor\CKEditor
 /* @var $this yii\web\View */
 /* @var $model app\models\Testcases */
 /* @var $form yii\widgets\ActiveForm */
@@ -14,17 +14,31 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'steps')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'steps')->widget(CKEditor::className(), [
 
-    <?= $form->field($model, 'expected_result')->textInput(['maxlength' => true]) ?>
+        'options' => ['rows' => 6],
 
-    <?= $form->field($model, 'actual_result')->textInput(['maxlength' => true]) ?>
+        'preset' => 'basic'
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
+]) ?>
 
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+    <?= $form->field($model, 'expected_result')->widget(CKEditor::className(), [
 
-    <?= $form->field($model, 'category_id')->textInput() ?>
+        'options' => ['rows' => 6],
+
+        'preset' => 'basic'
+
+]) ?>
+
+    <?= $form->field($model, 'actual_result')->widget(CKEditor::className(), [
+
+        'options' => ['rows' => 6],
+
+        'preset' => 'basic'
+
+]) ?>
+
+    <?= $form->field($model, 'category_id')->dropDownList($model->categoryList()) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

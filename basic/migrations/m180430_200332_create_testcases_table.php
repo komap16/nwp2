@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `testcases`.
  */
-class m180430_152942_create_testcases_table extends Migration
+class m180430_200332_create_testcases_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -18,9 +18,10 @@ class m180430_152942_create_testcases_table extends Migration
 	    'steps' => $this->string(150)->notNull(),
 	    'expected_result' => $this->string(150)->notNull(),
 	    'actual_result' => $this->string(150)->notNull(),
-	    'created_at' => $this->datetime()->notNull(),
+	    'created_at' => $this->datetime(),
 	    'updated_at' => $this->datetime(),
             'category_id' => $this->integer(),
+            'user_id' => $this->integer(),
         ]);
     }
 

@@ -1,9 +1,13 @@
 <?php
 
 namespace app\models;
-
-
+use yii\db\ActiveRecord;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 use Yii;
+use yii\helpers\ArrayHelper;
+use app\models\Category;
+
 
 /**
  * This is the model class for table "testcases".
@@ -35,7 +39,7 @@ class Testcases extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['description', 'steps', 'expected_result', 'actual_result', 'created_at', 'category_id'], 'required'],
+            [['description', 'steps', 'expected_result', 'actual_result', 'category_id'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
             [['category_id'], 'integer'],
             [['description'], 'string', 'max' => 50],
@@ -57,7 +61,21 @@ class Testcases extends \yii\db\ActiveRecord
             'actual_result' => 'Actual Result',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
-            'category_id' => 'Category ID',
+            'category_id' => 'Category',
+        ];
+    }
+    
+    public function behaviors() {
+
+        return [
+            'timestamp' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                'value' => new Expression('NOW()'),
+            ],
         ];
     }
 
@@ -67,5 +85,9 @@ class Testcases extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+    
+    public function categoryList() {
+        return ArrayHelper::map(Category::find()->all(), 'id', 'title');
     }
 }
