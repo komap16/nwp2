@@ -13,7 +13,7 @@ $this->title = 'Testcases';
 <div class="testcases-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Добавить тест-кейс', ['create'], ['class' => 'btn btn-success']) ?>
@@ -21,18 +21,25 @@ $this->title = 'Testcases';
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'description',
-            'steps',
-            'expected_result',
-            'actual_result',
+            'description:html',
+            'steps:html',
+            'expected_result:html',
+            'actual_result:html',
             'created_at',
             'updated_at',
-            'category_id',
+            [
+                'attribute' => 'category_id',
+                'label' => 'Категория',
+                'value' => function ($model) {
+
+                    return $model->category->title;
+                },
+            ],
             
 
             ['class' => 'yii\grid\ActionColumn'],

@@ -17,23 +17,23 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'description') ?>
+    <?php //$form->field($model, 'description') ?>
 
-    <?= $form->field($model, 'steps') ?>
+    <?php // $form->field($model, 'steps') ?>
 
-    <?= $form->field($model, 'expected_result') ?>
+    <?php // $form->field($model, 'expected_result') ?>
 
-    <?= $form->field($model, 'actual_result') ?>
+    <?php // $form->field($model, 'actual_result') ?>
 
     <?php //echo $form->field($model, 'created_at') ?>
 
     <?php // echo $form->field($model, 'updated_at') ?>
 
-   <?php // echo $form->field($model, 'category_id') ?>
+   <?php echo $form->field($model, 'category_id')->dropDownList($model->categoryList()) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton('Сбросить', ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

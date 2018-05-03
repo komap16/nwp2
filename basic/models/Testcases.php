@@ -55,13 +55,13 @@ class Testcases extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'description' => 'Description',
-            'steps' => 'Steps',
-            'expected_result' => 'Expected Result',
-            'actual_result' => 'Actual Result',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'category_id' => 'Category',
+            'description' => 'Описание',
+            'steps' => 'Шаги воспроизвидения',
+            'expected_result' => 'Ожидаемый результат',
+            'actual_result' => 'Фактический результат',
+            'created_at' => 'Создано',
+            'updated_at' => 'Обновлено',
+            'category_id' => 'Категория',
         ];
     }
     
