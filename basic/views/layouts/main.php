@@ -35,14 +35,12 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
+    $items = [
+            
             ['label' => 'Тест кейсы', 'url' => ['/testcases']],
             ['label' => 'Категории', 'url' => ['/category']],
-            ['label' => 'Регистрация', 'url' => ['/site/signup']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Логин', 'url' => ['/site/login']]
+                ['label' => 'Логин', 'url' => ['/site/login']]  
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
@@ -53,7 +51,13 @@ AppAsset::register($this);
                 . Html::endForm()
                 . '</li>'
             )
-        ],
+        ];
+    if (Yii::$app->user->isGuest) {
+        $items[] = ['label' => 'Регистрация', 'url' => ['/site/signup']];
+    }
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'items' => $items,
     ]);
     NavBar::end();
     ?>

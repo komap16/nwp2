@@ -1,7 +1,7 @@
 <?php
 
 namespace app\controllers;
-
+use yii\filters\AccessControl;
 use Yii;
 use app\models\Category;
 use app\models\CategorySearch;
@@ -20,6 +20,17 @@ class CategoryController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => [],
+                'rules' => [
+                    [
+                        'actions' => [],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

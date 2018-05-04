@@ -24,12 +24,12 @@ class TestcasesController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['view'],
+                'only' => [],
                 'rules' => [
                     [
-                        'actions' => ['view'],
+                        'actions' => [],
                         'allow' => true,
-                        'roles' => ['?'],
+                        'roles' => ['@'],
                     ],
                 ],
             ],
